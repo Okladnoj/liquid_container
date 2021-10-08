@@ -17,10 +17,9 @@ Liquid button container. The physics of the Hover effect is not indistinguishabl
 
 - Add this to your pubspec.yaml
 
-  ```
+  ```yaml
   dependencies:
-  liquid_container: ^0.0.1
-
+    liquid_container: ^0.0.2
   ```
 
 - Get the package from Pub:
@@ -31,7 +30,7 @@ Liquid button container. The physics of the Hover effect is not indistinguishabl
 
 - Import it in your file
 
-  ```
+  ```dart
   import 'package:liquid_container/liquid_container.dart';
   ```
 
@@ -39,7 +38,7 @@ Liquid button container. The physics of the Hover effect is not indistinguishabl
 
 - Create options
 
-```
+```dart
   final optionsParam = Options(
     layers: [
       LayerModel(
@@ -66,7 +65,7 @@ Liquid button container. The physics of the Hover effect is not indistinguishabl
 
 - Add BoxDecoration to customize the container shape (optional)
 
-```
+```dart
   BoxDecoration _borderForm() {
     return const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -80,7 +79,7 @@ Liquid button container. The physics of the Hover effect is not indistinguishabl
 
 - Use the pretty hover button
 
-```
+```dart
   Widget _buildLiquidButton() {
     return LiquidContainer(
       onTap: () {
@@ -254,4 +253,3 @@ class _BigNoiseLiquidWidgetState extends State<BigNoiseLiquidWidget> {
 # Author
 
 [Okladnoj](https://t.me/okladnoj)
-
