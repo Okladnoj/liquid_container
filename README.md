@@ -4,7 +4,7 @@ Liquid button container. The physics of the Hover effect is not indistinguishabl
 
 ![](https://github.com/Okladnoj/liquid_container/blob/master/assets/image.jpeg)
 
-![](https://github.com/Okladnoj/liquid_container/blob/master/assets/liquid_widget.gif)
+![](https://github.com/Okladnoj/liquid_container/blob/master/assets/liquid_widget.mp4)
 
 ## Features
 
