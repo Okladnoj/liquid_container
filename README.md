@@ -1,10 +1,33 @@
 # liquid_container
 
-Liquid button container. The physics of the Hover effect is not indistinguishable from a drop of water
 
-![](https://github.com/Okladnoj/liquid_container/blob/master/assets/image.jpeg)
 
-![](https://github.com/Okladnoj/liquid_container/blob/master/assets/liquid_widget.gif)
+<p align="center">
+  <a href="https://flutter.dev">
+    <img src="https://img.shields.io/badge/Platform-Flutter-02569B?logo=flutter"
+      alt="Platform" />
+  </a>
+  <a href="https://pub.dartlang.org/packages/liquid_container">
+    <img src="https://img.shields.io/pub/v/liquid_container.svg"
+      alt="Pub Package" />
+  </a> 
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/github/license/aagarwal1012/animated-text-kit?color=red"
+      alt="License: MIT" />
+  </a>
+  <a href="https://www.paypal.com/donate?hosted_button_id=NBYVPYB7XDW6A">
+    <img src="https://img.shields.io/badge/Donate-PayPal-00457C?logo=paypal"
+      alt="Donate" />
+  </a>
+
+</p><br>
+
+## Demo
+
+<h1 align="center">Liquid button container. The physics of the Hover effect is not indistinguishable from a drop of water</h1>
+<p align="center"><img src="https://github.com/Okladnoj/liquid_container/blob/master/assets/image.jpeg?raw=true"/></p>
+
+<p align="center"><img src="https://github.com/Okladnoj/liquid_container/blob/master/assets/liquid_widget.gif?raw=true"/></p>
 
 ## Features
 
