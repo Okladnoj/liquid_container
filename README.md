@@ -2,6 +2,11 @@
 
 Liquid button container. The physics of the Hover effect is not indistinguishable from a drop of water
 
+<p align="center">
+<img src="https://github.com/Okladnoj/liquid_container/blob/master/assets/image.jpeg" >
+<img src="https://github.com/Okladnoj/liquid_container/blob/master/assets/liquid_widget.gif">
+</p>
+
 ## Features
 
 - easy to use
