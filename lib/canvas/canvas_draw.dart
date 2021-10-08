@@ -58,8 +58,10 @@ class SimplePaint extends CustomPainter {
             );
           }
         }
-        final double xShift = _constraints.maxWidth / 2 - _constraints.maxWidth * _scale / 2;
-        final double yShift = _constraints.maxHeight / 2 - _constraints.maxHeight * _scale / 2;
+        final double xShift =
+            _constraints.maxWidth / 2 - _constraints.maxWidth * _scale / 2;
+        final double yShift =
+            _constraints.maxHeight / 2 - _constraints.maxHeight * _scale / 2;
         if (_paintStyle != null) {
           canvas.drawPath(
             _path.transform(Float64List.fromList([

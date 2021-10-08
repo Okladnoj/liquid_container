@@ -88,7 +88,8 @@ class LiquidContainer extends StatelessWidget {
         _corePaint?.updatePointsStream.add([
           touchUpdate(
             Offset(_random.nextDouble() * width, _random.nextDouble() * height),
-            force: math.max(optionsParam.forceFactorBuild, forceFactorTempBuild),
+            force:
+                math.max(optionsParam.forceFactorBuild, forceFactorTempBuild),
             isShow: isShowTouchBuild,
           )
         ]);
@@ -145,7 +146,8 @@ class LiquidContainer extends StatelessWidget {
           double topLeft = 0;
           double bottomLeft = 0;
           if (boxDecorationLabel?.borderRadius != null) {
-            final _borderRadius = boxDecorationLabel?.borderRadius.toString() ?? '';
+            final _borderRadius =
+                boxDecorationLabel?.borderRadius.toString() ?? '';
 
             const _circular = 'BorderRadius.circular(';
             const _only = 'BorderRadius.only(';
@@ -199,10 +201,14 @@ class LiquidContainer extends StatelessWidget {
               stream: _corePaint?.streamListLayerModel,
               builder: (context, snapshot) {
                 final List<Widget> children = [];
-                children.addAll(List.generate(optionsParam.layers.length, (index) {
-                  final double _scale = optionsParam.layerScales[index] * optionsParam.layers[index].scaleLayer;
-                  final double xShift = constraints.maxWidth / 2 - constraints.maxWidth * _scale / 2;
-                  final double yShift = constraints.maxHeight / 2 - constraints.maxHeight * _scale / 2;
+                children
+                    .addAll(List.generate(optionsParam.layers.length, (index) {
+                  final double _scale = optionsParam.layerScales[index] *
+                      optionsParam.layers[index].scaleLayer;
+                  final double xShift = constraints.maxWidth / 2 -
+                      constraints.maxWidth * _scale / 2;
+                  final double yShift = constraints.maxHeight / 2 -
+                      constraints.maxHeight * _scale / 2;
                   return Container(
                     transform: Matrix4(
                       _scale, 0, 0, 0, //
@@ -211,7 +217,8 @@ class LiquidContainer extends StatelessWidget {
                       xShift, yShift, 0, 1, //
                     ),
                     decoration: boxDecorationLabel?.copyWith(
-                        color: optionsParam.layers[optionsParam.layerNumbers[index]].color),
+                        color: optionsParam
+                            .layers[optionsParam.layerNumbers[index]].color),
                   );
                 }).toList());
                 children.add(child ?? const CircularProgressIndicator());
