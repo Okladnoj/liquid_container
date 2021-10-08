@@ -2,6 +2,7 @@ name: liquid_container
 description: Liquid button container with Hover effect.
 version: 0.0.1
 homepage: https://t.me/okladnoj
+repository: https://github.com/Okladnoj/liquid_container.git
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
