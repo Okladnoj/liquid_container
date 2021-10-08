@@ -1,8 +1,44 @@
 import '../core/core_stream_paint.dart';
 import 'model_components.dart';
 
+/// ### [Options] - powerful customization engine for fluid physics widget
 class Options {
-  /// Designer with liquid widget settings
+  /// ### [Options] - powerful customization engine for fluid physics widget
+  /// - Example of a Minimum Liquid Effect Setting
+  /// ```
+  ///   final options = Options(
+  ///     layers: [
+  ///       LayerModel(
+  ///         points: [],
+  ///         viscosity: 0.9,
+  ///         touchForce: 30,
+  ///         forceLimit: 15,
+  ///         color: const Color(0xFF00FF00),
+  ///       ),
+  ///     ],
+  ///     gap: 15,
+  ///     noise: 5,
+  ///     forceFactorBuild: 10,
+  ///     forceFactorOnTap: 150,
+  ///   );
+  ///```
+  ///
+  /// - Use [options]
+  ///```
+  /// Widget _buildLiquidButton() {
+  ///   return LiquidContainer(
+  ///     onTap: () {
+  ///       // same code
+  ///     },
+  ///     optionsParam: options,
+  ///     child: const SizedBox(
+  ///       height: 80,
+  ///       width: 300,
+  ///     ),
+  ///   );
+  /// }
+  /// ```
+
   Options({
     this.tension = 0.45,
     this.width = 50,

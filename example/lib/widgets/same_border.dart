@@ -40,7 +40,9 @@ class _SameBorderLiquidWidgetState extends State<SameBorderLiquidWidget> {
       child: LiquidContainer(
         onTap: _onTapToLiquidButton,
         optionsParam: optionsParam,
-        boxDecorationLabel: BoxDecoration(borderRadius: BorderRadius.circular(50)),
+        boxDecorationLabel: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+        ),
         child: _buildForegroundChild(),
       ),
     );

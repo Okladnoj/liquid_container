@@ -7,6 +7,7 @@ import 'package:vector_math/vector_math.dart';
 
 import '../models/model.dart';
 
+/// The main purpose of this class is to find many points of the contour of the liquid widget, fill in the physico-dynamic model and calculate the properties of this model before the next drawing.
 class CorePaint {
   late final double height;
   late final double width;
@@ -21,6 +22,8 @@ class CorePaint {
   Timer? _timerOfRedraw;
   final Path _path = Path();
   late bool _isReadTouch;
+
+  /// The main purpose of this class is to find many points of the contour of the liquid widget, fill in the physico-dynamic model and calculate the properties of this model before the next drawing.
 
   CorePaint({
     required this.height,
@@ -79,7 +82,9 @@ class CorePaint {
           final double my = point.y - touch.y;
           final double md = math.sqrt(mx * mx + my * my);
           final double mf = math.max(
-              -layer.forceLimit.toDouble(), math.min(layer.forceLimit.toDouble(), (mouseForce * touch.force) / md));
+            -layer.forceLimit.toDouble(),
+            math.min(layer.forceLimit.toDouble(), (mouseForce * touch.force) / md),
+          );
           point.vx += mf * ((mx / d).isNaN ? 0 : (mx / md));
           point.vy += mf * ((my / d).isNaN ? 0 : (my / md));
         }

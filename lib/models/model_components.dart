@@ -1,7 +1,8 @@
 import 'dart:ui';
 
+/// The layer model on the basis of which the image is drawn on [Canvas]
 class LayerModel {
-  /// точки контура Безье
+  /// Bézier path points that are on the edge of the liquid widget
   List<DynamicPoint> points;
   double viscosity;
   double touchForce;
@@ -9,10 +10,10 @@ class LayerModel {
   Paint? paintStyle;
   Color? color;
 
-  /// Масштабирование размера жидкого слоя, зависит от порядка слоев
+  /// Scaling the size of the liquid layer, depends on the order of the layers
   double scaleLayer;
 
-  /// Модель слоя на основе которой отрисовывается изображение на [Canvas]
+  /// The layer model on the basis of which the image is drawn on [Canvas]
   LayerModel({
     List<DynamicPoint>? points,
     required this.viscosity,
@@ -28,18 +29,90 @@ class LayerModel {
           ..style = PaintingStyle.fill;
 }
 
+/// Coordinate point with physical properties at the edge of the widget.
 class DynamicPoint {
+  /// Axis current position x
   double x;
+
+  /// Axis current position y
   double y;
+
+  /// X-axis start position
   double ox;
+
+  /// Y-axis start position
   double oy;
+
+  /// The current speed of the point movement along the X axis
   double vx;
+
+  /// The current speed of the point movement along the Y axis
   double vy;
+
+  /// Next, the same point on the edge of the widget
   DynamicPoint? pNext;
+
+  /// Previous, the same point on the edge of the widget
   DynamicPoint? pPrev;
+
+  /// The vertex of the control vector of the cubic Bezier line, located from the side of the next point on the edge of the widget.
   Offset? cNext;
+
+  /// The vertex of the control vector of the cubic Bezier line, located to the side of the previous point on the edge of the widget.
   Offset? cPrev;
 
+  /// ### Coordinate point with physical properties at the edge of the widget.
+  ///
+  /// Axis current position x
+  /// ```
+  /// double x;
+  /// ```
+
+  /// Axis current position y
+  /// ```
+  /// double y;
+  /// ```
+
+  /// X-axis start position
+  /// ```
+  /// double ox;
+  /// ```
+
+  /// Y-axis start position
+  /// ```
+  /// double oy;
+  /// ```
+
+  /// The current speed of the point movement along the X axis
+  /// ```
+  /// double vx;
+  /// ```
+
+  /// The current speed of the point movement along the Y axis
+  /// ```
+  /// double vy;
+  /// ```
+
+  /// Next, the same point on the edge of the widget
+  /// ```
+  /// DynamicPoint? pNext;
+  /// ```
+
+  /// Previous, the same point on the edge of the widget
+  /// ```
+  /// DynamicPoint? pPrev;
+  /// ```
+
+  /// The vertex of the control vector of the cubic Bezier line, located from the side of the next point on the edge of the widget.
+  /// ```
+  /// Offset? cNext;
+  /// ```
+
+  /// The vertex of the control vector of the cubic Bezier line, located to the side of the previous point on the edge of the widget.
+  /// ```
+  /// Offset? cPrev;
+  /// ```
+  ///
   DynamicPoint({
     required this.x,
     required this.y,
@@ -50,14 +123,51 @@ class DynamicPoint {
   });
 }
 
+/// ### Touch point with properties
+///
 class TouchModel {
+  /// Coordinate [x]
   double x;
+
+  /// Coordinate [y]
   double y;
+
+  /// Coordinate [z] (Not supported at the moment)
   double z;
+
+  /// Pressing force on the liquid element. [x]
   double force;
+
+  /// whether to show a short touch (Tap) on the [LiquidContainer]
   bool isShow = false;
 
-  /// Создание модели касания экрана
+  /// ### Touch point with properties
+  ///
+  /// * Coordinate [x]
+  /// ```
+  /// double x;
+  /// ```
+
+  /// * Coordinate [y]
+  /// ```
+  /// double y;
+  /// ```
+
+  /// * Coordinate [z] (Not supported at the moment)
+  /// ```
+  /// double z;
+  /// ```
+
+  /// * Pressing force on the liquid element. [x]
+  /// ```
+  /// double force;
+  /// ```
+
+  /// * whether to show a short touch (Tap) on the [LiquidContainer]
+  /// ```
+  /// bool isShow = false;
+  /// ```
+  /// *
   TouchModel({
     required this.x,
     required this.y,

@@ -8,6 +8,22 @@ import '../canvas/canvas_draw.dart';
 import '../core/core_stream_paint.dart';
 import '../models/model.dart';
 
+/// ### [LiquidContainer] - Liquid button container with Hover effect. Easily add liquid effect to your application
+/// * Use
+///```
+/// Widget _buildLiquidButton() {
+///   return LiquidContainer(
+///     onTap: () {
+///       // same code
+///     },
+///     optionsParam: options,
+///     child: const SizedBox(
+///       height: 80,
+///       width: 300,
+///     ),
+///   );
+/// }
+/// ```
 class LiquidContainer extends StatelessWidget {
   final double forceFactorTempBuild;
   final BoxDecoration? boxDecorationLabel;
@@ -15,6 +31,43 @@ class LiquidContainer extends StatelessWidget {
   final Widget? child;
   final void Function()? onTap;
   final bool isShowTouchBuild;
+
+  /// ### [LiquidContainer] - Liquid button container with Hover effect. Easily add liquid effect to your application
+  /// - Example of a Minimum Liquid Effect Setting
+  /// ```
+  ///   final options = Options(
+  ///     layers: [
+  ///       LayerModel(
+  ///         points: [],
+  ///         viscosity: 0.9,
+  ///         touchForce: 30,
+  ///         forceLimit: 15,
+  ///         color: const Color(0xFF00FF00),
+  ///       ),
+  ///     ],
+  ///     gap: 15,
+  ///     noise: 5,
+  ///     forceFactorBuild: 10,
+  ///     forceFactorOnTap: 150,
+  ///   );
+  ///```
+  ///
+  /// ###
+  /// * Use
+  ///```
+  /// Widget _buildLiquidButton() {
+  ///   return LiquidContainer(
+  ///     onTap: () {
+  ///       // same code
+  ///     },
+  ///     optionsParam: options,
+  ///     child: const SizedBox(
+  ///       height: 80,
+  ///       width: 300,
+  ///     ),
+  ///   );
+  /// }
+  /// ```
   const LiquidContainer({
     Key? key,
     this.boxDecorationLabel,
@@ -33,8 +86,11 @@ class LiquidContainer extends StatelessWidget {
     Future.delayed(Duration(milliseconds: 50 + _random.nextInt(150)), () {
       try {
         _corePaint?.updatePointsStream.add([
-          touchUpdate(Offset(_random.nextDouble() * width, _random.nextDouble() * height),
-              force: math.max(optionsParam.forceFactorBuild, forceFactorTempBuild), isShow: isShowTouchBuild)
+          touchUpdate(
+            Offset(_random.nextDouble() * width, _random.nextDouble() * height),
+            force: math.max(optionsParam.forceFactorBuild, forceFactorTempBuild),
+            isShow: isShowTouchBuild,
+          )
         ]);
         _corePaint?.updatePointsStream.add([]);
       } catch (_) {}
@@ -45,17 +101,35 @@ class LiquidContainer extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         onTapDown: (_) {
-          _corePaint?.updatePointsStream
-              .add([touchUpdate(_.localPosition, force: optionsParam.forceFactorOnTap, isShow: true)]);
+          _corePaint?.updatePointsStream.add(
+            [
+              touchUpdate(
+                _.localPosition,
+                force: optionsParam.forceFactorOnTap,
+                isShow: true,
+              ),
+            ],
+          );
         },
         onVerticalDragUpdate: (_) {
-          _corePaint?.updatePointsStream.add([touchUpdate(_.localPosition, isShow: true)]);
+          _corePaint?.updatePointsStream.add(
+            [
+              touchUpdate(
+                _.localPosition,
+                isShow: true,
+              ),
+            ],
+          );
         },
         onVerticalDragEnd: (details) {
           _corePaint?.updatePointsStream.add([]);
         },
         onHorizontalDragUpdate: (_) {
-          _corePaint?.updatePointsStream.add([touchUpdate(_.localPosition, isShow: true)]);
+          _corePaint?.updatePointsStream.add(
+            [
+              touchUpdate(_.localPosition, isShow: true),
+            ],
+          );
         },
         onHorizontalDragEnd: (details) {
           _corePaint?.updatePointsStream.add([]);
@@ -76,17 +150,38 @@ class LiquidContainer extends StatelessWidget {
             const _circular = 'BorderRadius.circular(';
             const _only = 'BorderRadius.only(';
             if (_borderRadius.contains(_circular)) {
-              final double _cir =
-                  double.tryParse(_borderRadius.substring(_circular.length, _borderRadius.length - 2)) ?? 0;
+              final double _cir = double.tryParse(
+                    _borderRadius.substring(
+                      _circular.length,
+                      _borderRadius.length - 2,
+                    ),
+                  ) ??
+                  0;
               topRight = _cir;
               bottomRight = _cir;
               topLeft = _cir;
               bottomLeft = _cir;
             } else if (_borderRadius.contains(_only)) {
-              topRight = getPiceOfString(start: 'topRight: Radius.circular(', end: ')', extract: _borderRadius);
-              bottomRight = getPiceOfString(start: 'bottomRight: Radius.circular(', end: ')', extract: _borderRadius);
-              topLeft = getPiceOfString(start: 'topLeft: Radius.circular(', end: ')', extract: _borderRadius);
-              bottomLeft = getPiceOfString(start: 'bottomLeft: Radius.circular(', end: ')', extract: _borderRadius);
+              topRight = getPiceOfString(
+                start: 'topRight: Radius.circular(',
+                end: ')',
+                extract: _borderRadius,
+              );
+              bottomRight = getPiceOfString(
+                start: 'bottomRight: Radius.circular(',
+                end: ')',
+                extract: _borderRadius,
+              );
+              topLeft = getPiceOfString(
+                start: 'topLeft: Radius.circular(',
+                end: ')',
+                extract: _borderRadius,
+              );
+              bottomLeft = getPiceOfString(
+                start: 'bottomLeft: Radius.circular(',
+                end: ')',
+                extract: _borderRadius,
+              );
             }
           }
           optionsParam.corePaint?.dispose();

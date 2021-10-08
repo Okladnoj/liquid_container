@@ -5,10 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import '../models/model.dart';
 
+/// A simple canvas draws a group of model-based ([Options]) filled paths for each tick of the redraw.
 class SimplePaint extends CustomPainter {
   final Options _optionsParam;
   final BoxConstraints _constraints;
 
+  /// ### A simple canvas draws a group of model-based ([Options]) filled paths for each tick of the redraw.
   const SimplePaint({
     required BoxConstraints constraints,
     required Options optionsParam,
@@ -31,6 +33,7 @@ class SimplePaint extends CustomPainter {
           final int v0 = (i + 0) % _layerModel.points.length;
           final int v1 = (i + 1) % _layerModel.points.length;
 
+          /// If the point to draw the line coincides with the origin of the Bézier path
           if (_layerModel.points[0] == _layerModel.points[i]) {
             _path.moveTo(
               _layerModel.points[v0].x,

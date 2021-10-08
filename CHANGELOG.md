@@ -1,3 +1,6 @@
+## 1.0.0
+
+- Add API Documentation
 ## 0.0.3
 
 - Fix readme

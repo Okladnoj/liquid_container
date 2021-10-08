@@ -5,10 +5,12 @@ class DifferentScaleLiquidWidget extends StatefulWidget {
   const DifferentScaleLiquidWidget({Key? key}) : super(key: key);
 
   @override
-  _DifferentScaleLiquidWidgetState createState() => _DifferentScaleLiquidWidgetState();
+  _DifferentScaleLiquidWidgetState createState() =>
+      _DifferentScaleLiquidWidgetState();
 }
 
-class _DifferentScaleLiquidWidgetState extends State<DifferentScaleLiquidWidget> {
+class _DifferentScaleLiquidWidgetState
+    extends State<DifferentScaleLiquidWidget> {
   static const _label = 'Different Scale';
   final optionsParam = Options(
     layers: [
