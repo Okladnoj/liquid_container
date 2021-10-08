@@ -1,3 +1,7 @@
+## 0.0.2
+
+- Add repository
+- Add demonstration
 ## 0.0.1
 
 - Initial release (null-safety support, bump min SDK version).
