@@ -18,7 +18,7 @@ Liquid button container. The physics of the Hover effect is not indistinguishabl
 
   ```yaml
   dependencies:
-    liquid_container: ^0.0.2
+    liquid_container: ^0.0.3
   ```
 
 - Get the package from Pub:
