@@ -1,8 +1,8 @@
 name: liquid_container
 description: Liquid button container with Hover effect. Easily add liquid effect to your application
-version: 1.0.0+1
+version: 1.0.0+2
 homepage: https://www.linkedin.com/in/dmitry-okladnoy-359112159/
-repository: https://github.com/Okladnoj/liquid_container.git
+repository: https://github.com/Okladnoj/liquid_container
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

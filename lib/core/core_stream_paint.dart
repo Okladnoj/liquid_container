@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vector_math/vector_math.dart';
 
@@ -19,7 +20,7 @@ class CorePaint {
   late List<LayerModel> _listLayerModel;
   late Set<Offset> _allOffsets;
   late final double _gap;
-  Timer? _timerOfRedraw;
+  Ticker? _timerOfRedraw;
   final Path _path = Path();
   late bool _isReadTouch;
 
@@ -77,9 +78,9 @@ class CorePaint {
             (optionsParam.layers[0].color ?? const Color(0x00000000)),
             (optionsParam.layers.last.color ?? const Color(0x00000000))
           ]);
-          double mouseForce = layer.touchForce;
+          double touchForce = layer.touchForce;
           if (_path.contains(Offset(touch.x, touch.y))) {
-            mouseForce *= -optionsParam.hoverFactor;
+            touchForce *= -optionsParam.hoverFactor;
           } else {
             layer.paintStyle?.shader = null;
           }
@@ -89,7 +90,7 @@ class CorePaint {
           final double mf = math.max(
             -layer.forceLimit.toDouble(),
             math.min(
-                layer.forceLimit.toDouble(), (mouseForce * touch.force) / md),
+                layer.forceLimit.toDouble(), (touchForce * touch.force) / md),
           );
           point.vx += mf * ((mx / d).isNaN ? 0 : (mx / md));
           point.vy += mf * ((my / d).isNaN ? 0 : (my / md));
@@ -158,7 +159,7 @@ class CorePaint {
       _allOffsets.add(Offset(dx + i, dy));
     }
 
-    /// Правый верхний угол виджета ===========================================<
+    /// The upper right corner of the widget ===========================================<
     if (topRight > 0) {
       final topRightLine = topRight * math.pi / 2;
       _gapTemp = _getGapTemp(line: topRightLine, gap: _gap).toDouble();
@@ -172,7 +173,7 @@ class CorePaint {
       }
     }
 
-    /// Правая грань виджета ==================================================<
+    /// Right edge of the widget ==================================================<
     final double rightLine = height - topRight - bottomRight;
     _gapTemp = _getGapTemp(line: rightLine, gap: _gap).toDouble();
     dx = width;
@@ -183,7 +184,7 @@ class CorePaint {
       _allOffsets.add(Offset(dx, dy + i));
     }
 
-    /// Правый нижний угол виджета ============================================<
+    /// Bottom-right corner of the widget ============================================<
     if (bottomRight > 0) {
       final bottomRightLine = bottomRight * math.pi / 2;
       _gapTemp = _getGapTemp(line: bottomRightLine, gap: _gap).toDouble();
@@ -198,7 +199,7 @@ class CorePaint {
       }
     }
 
-    /// Нижняя грань виджета ==================================================<
+    /// Bottom edge of the widget ==================================================<
     final double bottomLine = width - bottomLeft - bottomRight;
     _gapTemp = _getGapTemp(line: bottomLine, gap: _gap).toDouble();
     dx = bottomLeft;
@@ -209,7 +210,7 @@ class CorePaint {
       _allOffsets.add(Offset(dx + i, dy));
     }
 
-    /// Левый нижний угол виджета =============================================<
+    /// Bottom left corner of the widget =============================================<
     if (bottomLeft > 0) {
       final bottomRightLine = bottomLeft * math.pi / 2;
       _gapTemp = _getGapTemp(line: bottomRightLine, gap: _gap).toDouble();
@@ -224,7 +225,7 @@ class CorePaint {
       }
     }
 
-    /// Левая грань виджета ===================================================<
+    /// Left side of the widget ===================================================<
     final double leftLine = height - topLeft - bottomLeft;
     _gapTemp = _getGapTemp(line: leftLine, gap: _gap).toDouble();
     dx = 0;
@@ -235,7 +236,7 @@ class CorePaint {
       _allOffsets.add(Offset(dx, dy + i));
     }
 
-    /// Левый верхний угол виджета ============================================<
+    /// The upper left corner of the widget ============================================<
     if (topLeft > 0) {
       final topRightLine = topLeft * math.pi / 2;
       _gapTemp = _getGapTemp(line: topRightLine, gap: _gap).toDouble();
@@ -251,7 +252,7 @@ class CorePaint {
     }
   }
 
-  /// Заполнение моделей динамических точек
+  /// Populating Dynamic Point Models
   void _writeDynamicPoints() {
     for (final LayerModel layerModel in optionsParam.layers) {
       layerModel.points.clear();
@@ -266,7 +267,7 @@ class CorePaint {
         ));
       }
 
-      /// Заполнение позиционирования точки относительно [pPrev] и [pNext]
+      /// Padding point positioning relative to [pPrev] and [pNext]
       for (final LayerModel layerModel in optionsParam.layers) {
         for (int i = 1; i <= layerModel.points.length; i++) {
           final v1 = (i + -1) % layerModel.points.length;
@@ -277,13 +278,12 @@ class CorePaint {
         }
       }
 
-      /// Построение грани виджета
+      /// Constructing a widget face
       _setBorder();
     }
   }
 
   void _setBorder() {
-    /// Построение грани виджета
     final DynamicPoint point = optionsParam.layers[0].points.last;
     _path.moveTo(point.ox, point.oy);
     for (final DynamicPoint point in optionsParam.layers[0].points) {
@@ -292,7 +292,7 @@ class CorePaint {
     _path.lineTo(point.ox, point.oy);
   }
 
-  /// Расчет шага
+  /// Step calculation
   num _getGapTemp({required num line, required num gap}) {
     if (line / 2 <= gap) {
       return line / 2;
@@ -330,7 +330,7 @@ class CorePaint {
 
   void _startRepaint() {
     _outputController.sink.add(_listLayerModel);
-    _timerOfRedraw = Timer.periodic(const Duration(milliseconds: 60), (_) {
+    _timerOfRedraw = Ticker((_) {
       _updatePoints();
       if (!_isReadTouch) {
         optionsParam.touches = [];
@@ -340,11 +340,12 @@ class CorePaint {
         _outputController.sink.add(_listLayerModel);
       } else {}
     });
+    _timerOfRedraw?.start();
   }
 
   void dispose() {
     _outputController.close();
     _inputController.close();
-    _timerOfRedraw?.cancel();
+    _timerOfRedraw?.dispose();
   }
 }

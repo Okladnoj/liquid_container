@@ -164,22 +164,22 @@ class LiquidContainer extends StatelessWidget {
               topLeft = _cir;
               bottomLeft = _cir;
             } else if (_borderRadius.contains(_only)) {
-              topRight = getPiceOfString(
+              topRight = _getPiceOfString(
                 start: 'topRight: Radius.circular(',
                 end: ')',
                 extract: _borderRadius,
               );
-              bottomRight = getPiceOfString(
+              bottomRight = _getPiceOfString(
                 start: 'bottomRight: Radius.circular(',
                 end: ')',
                 extract: _borderRadius,
               );
-              topLeft = getPiceOfString(
+              topLeft = _getPiceOfString(
                 start: 'topLeft: Radius.circular(',
                 end: ')',
                 extract: _borderRadius,
               );
-              bottomLeft = getPiceOfString(
+              bottomLeft = _getPiceOfString(
                 start: 'bottomLeft: Radius.circular(',
                 end: ')',
                 extract: _borderRadius,
@@ -273,7 +273,8 @@ class LiquidContainer extends StatelessWidget {
   }
 }
 
-double getPiceOfString({
+/// Gets the radius value from the Border Radius Geometry text properties.
+double _getPiceOfString({
   required String start,
   required String end,
   required String extract,

@@ -1,3 +1,10 @@
+## 1.0.0+2
+
+- Fix reference "View/report issues"
+## 1.0.0+1
+
+- Fix API Documentation
+
 ## 1.0.0
 
 - Add API Documentation
