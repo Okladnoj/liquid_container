@@ -61,15 +61,20 @@ class CorePaint {
     final List<TouchModel> touches = optionsParam.touches;
     for (final LayerModel layer in optionsParam.layers) {
       for (final DynamicPoint point in layer.points) {
-        final double dx = point.ox - point.x + (_random.nextDouble() - 0.5) * optionsParam.noise;
-        final double dy = point.oy - point.y + (_random.nextDouble() - 0.5) * optionsParam.noise;
+        final double dx = point.ox -
+            point.x +
+            (_random.nextDouble() - 0.5) * optionsParam.noise;
+        final double dy = point.oy -
+            point.y +
+            (_random.nextDouble() - 0.5) * optionsParam.noise;
         final double d = math.sqrt(dx * dx + dy * dy);
         final double f = d * optionsParam.forceFactor;
         point.vx += f * ((dx / d).isNaN ? 0 : (dx / d));
         point.vy += f * ((dy / d).isNaN ? 0 : (dy / d));
         for (int touchIndex = 0; touchIndex < touches.length; touchIndex++) {
           final TouchModel touch = touches[touchIndex];
-          layer.paintStyle?.shader = ui.Gradient.radial(Offset(touch.x, touch.y), math.max(width, height), [
+          layer.paintStyle?.shader = ui.Gradient.radial(
+              Offset(touch.x, touch.y), math.max(width, height), [
             (optionsParam.layers[0].color ?? const Color(0x00000000)),
             (optionsParam.layers.last.color ?? const Color(0x00000000))
           ]);
@@ -84,7 +89,8 @@ class CorePaint {
           final double md = math.sqrt(mx * mx + my * my);
           final double mf = math.max(
             -layer.forceLimit.toDouble(),
-            math.min(layer.forceLimit.toDouble(), (touchForce * touch.force) / md),
+            math.min(
+                layer.forceLimit.toDouble(), (touchForce * touch.force) / md),
           );
           point.vx += mf * ((mx / d).isNaN ? 0 : (mx / md));
           point.vy += mf * ((my / d).isNaN ? 0 : (my / md));
@@ -147,7 +153,8 @@ class CorePaint {
 
     _gapTemp = _getGapTemp(line: upLine, gap: _gap).toDouble();
 
-    if (upLine > 0 && topRight < _gap) _allOffsets.add(Offset(dx + _gapTemp / width, dy));
+    if (upLine > 0 && topRight < _gap)
+      _allOffsets.add(Offset(dx + _gapTemp / width, dy));
     for (double i = 0; i <= upLine; i += _gapTemp) {
       _allOffsets.add(Offset(dx + i, dy));
     }
@@ -171,7 +178,8 @@ class CorePaint {
     _gapTemp = _getGapTemp(line: rightLine, gap: _gap).toDouble();
     dx = width;
     dy = topRight;
-    if (rightLine > 0 && topLeft < _gap) _allOffsets.add(Offset(dx, dy + _gapTemp / width));
+    if (rightLine > 0 && topLeft < _gap)
+      _allOffsets.add(Offset(dx, dy + _gapTemp / width));
     for (double i = 0; i <= rightLine; i += _gapTemp) {
       _allOffsets.add(Offset(dx, dy + i));
     }
@@ -196,7 +204,8 @@ class CorePaint {
     _gapTemp = _getGapTemp(line: bottomLine, gap: _gap).toDouble();
     dx = bottomLeft;
     dy = height;
-    if (bottomLine > 0 && bottomRight < _gap) _allOffsets.add(Offset(dx + bottomLine - _gapTemp / width, dy));
+    if (bottomLine > 0 && bottomRight < _gap)
+      _allOffsets.add(Offset(dx + bottomLine - _gapTemp / width, dy));
     for (double i = bottomLine; i >= 0; i -= _gapTemp) {
       _allOffsets.add(Offset(dx + i, dy));
     }
@@ -221,7 +230,8 @@ class CorePaint {
     _gapTemp = _getGapTemp(line: leftLine, gap: _gap).toDouble();
     dx = 0;
     dy = topLeft;
-    if (leftLine > 0 && bottomLeft < _gap) _allOffsets.add(Offset(dx, dy + leftLine - _gapTemp / width));
+    if (leftLine > 0 && bottomLeft < _gap)
+      _allOffsets.add(Offset(dx, dy + leftLine - _gapTemp / width));
     for (double i = leftLine; i >= 0; i -= _gapTemp) {
       _allOffsets.add(Offset(dx, dy + i));
     }

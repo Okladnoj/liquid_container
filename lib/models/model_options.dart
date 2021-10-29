@@ -75,8 +75,10 @@ class Options {
             ],
         touches = touches ?? [] {
     assert(stepRedrawing > 0);
-    this.layerNumbers = layerNumbers ?? List.generate(this.layers.length, (index) => index);
-    layerScales = scaleOptionLayer ?? List.generate(this.layers.length, (index) => 1.0);
+    this.layerNumbers =
+        layerNumbers ?? List.generate(this.layers.length, (index) => index);
+    layerScales =
+        scaleOptionLayer ?? List.generate(this.layers.length, (index) => 1.0);
   }
   late double tension;
   late double width;
