@@ -48,6 +48,7 @@ class Options {
     this.forceFactor = 0.15,
     this.forceFactorBuild = 1,
     this.forceFactorOnTap = 1,
+    this.stepRedrawing = 2,
     List<LayerModel>? layers,
     List<TouchModel>? touches,
 
@@ -73,10 +74,9 @@ class Options {
               ),
             ],
         touches = touches ?? [] {
-    this.layerNumbers =
-        layerNumbers ?? List.generate(this.layers.length, (index) => index);
-    layerScales =
-        scaleOptionLayer ?? List.generate(this.layers.length, (index) => 1.0);
+    assert(stepRedrawing > 0);
+    this.layerNumbers = layerNumbers ?? List.generate(this.layers.length, (index) => index);
+    layerScales = scaleOptionLayer ?? List.generate(this.layers.length, (index) => 1.0);
   }
   late double tension;
   late double width;
@@ -90,6 +90,12 @@ class Options {
 
   /// Liquid widget disturbance when pressed
   double forceFactorOnTap;
+
+  /// Animation redraw step
+  /// (decreasing the animation step increases the fluid velocity and loads the computing power of the device)
+  ///
+  /// Animation step must be greater than [0]
+  int stepRedrawing;
   List<LayerModel> layers;
   late List<int> layerNumbers;
   late List<double> layerScales;

@@ -1,3 +1,7 @@
+## 1.0.1
+
+- Fix animation speed
+- Add option "stepRedrawing"
 ## 1.0.0+2
 
 - Fix reference "View/report issues"

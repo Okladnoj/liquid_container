@@ -36,9 +36,9 @@ class _BigNoiseLiquidWidgetState extends State<BigNoiseLiquidWidget> {
     ],
     gap: 30,
     noise: 30,
+    stepRedrawing: 4,
     forceFactorBuild: 10,
     forceFactorOnTap: 150,
-    forceFactor: 0.001,
     scaleOptionLayer: [1, 0.9, 0.8],
   );
   @override
