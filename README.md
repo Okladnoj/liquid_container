@@ -23,7 +23,7 @@
 ## Demo
 
 <h1 align="center">Liquid button container. The physics of the Hover effect is not indistinguishable from a drop of water</h1>
-<p align="center"><img src="https://github.com/Okladnoj/liquid_container/blob/master/assets/image.jpeg?raw=true"/></p>
+<p align="center"><img src="assets/image.png?raw=true"/></p>
 
 ## Video of the application
 

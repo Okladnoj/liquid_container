@@ -16,6 +16,8 @@ class LiquidApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: title,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
           title: const Text(title),
