@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import '../canvas/canvas_draw.dart';
 import '../core/core_stream_paint.dart';
@@ -69,31 +68,31 @@ class LiquidContainer extends StatelessWidget {
   /// }
   /// ```
   const LiquidContainer({
-    Key? key,
+    super.key,
     this.boxDecorationLabel,
     this.onTap,
     required this.optionsParam,
     required this.child,
     this.forceFactorTempBuild = 7,
     this.isShowTouchBuild = false,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
-    final _random = math.Random();
+    final random = math.Random();
     late double height;
     late double width;
-    CorePaint? _corePaint;
-    Future.delayed(Duration(milliseconds: 50 + _random.nextInt(150)), () {
+    CorePaint? corePaint;
+    Future.delayed(Duration(milliseconds: 50 + random.nextInt(150)), () {
       try {
-        _corePaint?.updatePointsStream.add([
+        corePaint?.updatePointsStream.add([
           touchUpdate(
-            Offset(_random.nextDouble() * width, _random.nextDouble() * height),
+            Offset(random.nextDouble() * width, random.nextDouble() * height),
             force:
                 math.max(optionsParam.forceFactorBuild, forceFactorTempBuild),
             isShow: isShowTouchBuild,
           )
         ]);
-        _corePaint?.updatePointsStream.add([]);
+        corePaint?.updatePointsStream.add([]);
       } catch (_) {}
     });
 
@@ -102,7 +101,7 @@ class LiquidContainer extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         onTapDown: (_) {
-          _corePaint?.updatePointsStream.add(
+          corePaint?.updatePointsStream.add(
             [
               touchUpdate(
                 _.localPosition,
@@ -113,7 +112,7 @@ class LiquidContainer extends StatelessWidget {
           );
         },
         onVerticalDragUpdate: (_) {
-          _corePaint?.updatePointsStream.add(
+          corePaint?.updatePointsStream.add(
             [
               touchUpdate(
                 _.localPosition,
@@ -123,20 +122,20 @@ class LiquidContainer extends StatelessWidget {
           );
         },
         onVerticalDragEnd: (details) {
-          _corePaint?.updatePointsStream.add([]);
+          corePaint?.updatePointsStream.add([]);
         },
         onHorizontalDragUpdate: (_) {
-          _corePaint?.updatePointsStream.add(
+          corePaint?.updatePointsStream.add(
             [
               touchUpdate(_.localPosition, isShow: true),
             ],
           );
         },
         onHorizontalDragEnd: (details) {
-          _corePaint?.updatePointsStream.add([]);
+          corePaint?.updatePointsStream.add([]);
         },
         onTapUp: (_) {
-          _corePaint?.updatePointsStream.add([]);
+          corePaint?.updatePointsStream.add([]);
         },
         child: LayoutBuilder(builder: (context, constraints) {
           height = constraints.maxHeight;
@@ -146,48 +145,48 @@ class LiquidContainer extends StatelessWidget {
           double topLeft = 0;
           double bottomLeft = 0;
           if (boxDecorationLabel?.borderRadius != null) {
-            final _borderRadius =
+            final borderRadius =
                 boxDecorationLabel?.borderRadius.toString() ?? '';
 
-            const _circular = 'BorderRadius.circular(';
-            const _only = 'BorderRadius.only(';
-            if (_borderRadius.contains(_circular)) {
-              final double _cir = double.tryParse(
-                    _borderRadius.substring(
-                      _circular.length,
-                      _borderRadius.length - 2,
+            const circular = 'BorderRadius.circular(';
+            const only = 'BorderRadius.only(';
+            if (borderRadius.contains(circular)) {
+              final double cir = double.tryParse(
+                    borderRadius.substring(
+                      circular.length,
+                      borderRadius.length - 2,
                     ),
                   ) ??
                   0;
-              topRight = _cir;
-              bottomRight = _cir;
-              topLeft = _cir;
-              bottomLeft = _cir;
-            } else if (_borderRadius.contains(_only)) {
+              topRight = cir;
+              bottomRight = cir;
+              topLeft = cir;
+              bottomLeft = cir;
+            } else if (borderRadius.contains(only)) {
               topRight = _getPiceOfString(
                 start: 'topRight: Radius.circular(',
                 end: ')',
-                extract: _borderRadius,
+                extract: borderRadius,
               );
               bottomRight = _getPiceOfString(
                 start: 'bottomRight: Radius.circular(',
                 end: ')',
-                extract: _borderRadius,
+                extract: borderRadius,
               );
               topLeft = _getPiceOfString(
                 start: 'topLeft: Radius.circular(',
                 end: ')',
-                extract: _borderRadius,
+                extract: borderRadius,
               );
               bottomLeft = _getPiceOfString(
                 start: 'bottomLeft: Radius.circular(',
                 end: ')',
-                extract: _borderRadius,
+                extract: borderRadius,
               );
             }
           }
           optionsParam.corePaint?.dispose();
-          _corePaint = CorePaint(
+          corePaint = CorePaint(
             height: height,
             width: width,
             topRight: topRight,
@@ -196,24 +195,24 @@ class LiquidContainer extends StatelessWidget {
             bottomLeft: bottomLeft,
             optionsParam: optionsParam,
           );
-          optionsParam.corePaint = _corePaint;
+          optionsParam.corePaint = corePaint;
           return StreamBuilder<List<LayerModel>>(
-              stream: _corePaint?.streamListLayerModel,
+              stream: corePaint?.streamListLayerModel,
               builder: (context, snapshot) {
                 final List<Widget> children = [];
                 children
                     .addAll(List.generate(optionsParam.layers.length, (index) {
-                  final double _scale = optionsParam.layerScales[index] *
+                  final double scale = optionsParam.layerScales[index] *
                       optionsParam.layers[index].scaleLayer;
                   final double xShift = constraints.maxWidth / 2 -
-                      constraints.maxWidth * _scale / 2;
+                      constraints.maxWidth * scale / 2;
                   final double yShift = constraints.maxHeight / 2 -
-                      constraints.maxHeight * _scale / 2;
+                      constraints.maxHeight * scale / 2;
                   return Container(
                     transform: Matrix4(
-                      _scale, 0, 0, 0, //
-                      0, _scale, 0, 0, //
-                      0, 0, _scale, 0, //
+                      scale, 0, 0, 0, //
+                      0, scale, 0, 0, //
+                      0, 0, scale, 0, //
                       xShift, yShift, 0, 1, //
                     ),
                     decoration: boxDecorationLabel?.copyWith(
@@ -279,11 +278,11 @@ double _getPiceOfString({
   required String end,
   required String extract,
 }) {
-  final int _st = extract.indexOf(start) + start.length;
-  final int _en = extract.indexOf(end, _st);
-  final String _temp = extract.substring(_st, _en);
+  final int st = extract.indexOf(start) + start.length;
+  final int en = extract.indexOf(end, st);
+  final String temp = extract.substring(st, en);
   try {
-    return double.parse(_temp);
+    return double.parse(temp);
   } catch (e) {
     return 0.0;
   }

@@ -1,7 +1,5 @@
 # liquid_container
 
-
-
 <p align="center">
   <a href="https://flutter.dev">
     <img src="https://img.shields.io/badge/Platform-Flutter-02569B?logo=flutter"
@@ -27,7 +25,9 @@
 <h1 align="center">Liquid button container. The physics of the Hover effect is not indistinguishable from a drop of water</h1>
 <p align="center"><img src="https://github.com/Okladnoj/liquid_container/blob/master/assets/image.jpeg?raw=true"/></p>
 
-<p align="center"><img src="https://github.com/Okladnoj/liquid_container/blob/master/assets/liquid_widget.gif?raw=true"/></p>
+## Video of the application
+
+![Video](assets/liquid_widget.mp4)
 
 ## Features
 
@@ -41,7 +41,7 @@
 
   ```yaml
   dependencies:
-    liquid_container: ^1.0.0
+    liquid_container: ^1.0.2
   ```
 
 - Get the package from Pub:
@@ -127,8 +127,8 @@ class LiquidApp extends StatelessWidget {
   static const title = 'Liquid Container';
 
   const LiquidApp({
-    Key? key,
-  }) : super(key: key);
+    super. key,
+  });
 
   @override
   Widget build(BuildContext context) {

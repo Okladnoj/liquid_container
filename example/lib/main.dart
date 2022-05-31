@@ -9,8 +9,8 @@ class LiquidApp extends StatelessWidget {
   static const title = 'Liquid Container';
 
   const LiquidApp({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +20,17 @@ class LiquidApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text(title),
         ),
-        body: Container(
-          color: Colors.grey,
-          child: ListView(
-            children: const [
-              BigNoiseLiquidWidget(),
-              NotNoiseLiquidWidget(),
-              OneLayerLiquidWidget(),
-              TwoLayersLiquidWidget(),
-              DifferentScaleLiquidWidget(),
-              NonBorderLiquidWidget(),
-              SameBorderLiquidWidget(),
-              SizedBox(height: 300),
-            ],
-          ),
+        body: ListView(
+          children: const [
+            BigNoiseLiquidWidget(),
+            NotNoiseLiquidWidget(),
+            OneLayerLiquidWidget(),
+            TwoLayersLiquidWidget(),
+            DifferentScaleLiquidWidget(),
+            NonBorderLiquidWidget(),
+            SameBorderLiquidWidget(),
+            SizedBox(height: 300),
+          ],
         ),
       ),
     );

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../core/core_stream_paint.dart';
 import 'model_components.dart';
 
@@ -105,9 +107,9 @@ class Options {
   double noise;
   CorePaint? corePaint;
   void refreshLayerModel() {
-    final List<LayerModel> _tempLayers = [];
+    final List<LayerModel> tempLayers = [];
     for (final LayerModel layer in layers) {
-      _tempLayers.add(LayerModel(
+      tempLayers.add(LayerModel(
         points: layer.points,
         viscosity: layer.viscosity,
         touchForce: layer.touchForce,
@@ -115,10 +117,12 @@ class Options {
         color: layer.color,
       ));
       if (layer.color == null) {
-        print(layer.color);
+        if (kDebugMode) {
+          print(layer.color);
+        }
       }
     }
 
-    layers = _tempLayers;
+    layers = tempLayers;
   }
 }

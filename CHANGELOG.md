@@ -1,3 +1,6 @@
+## 1.0.2
+
+- Update to flutter 3.0
 ## 1.0.1
 
 - Fix animation speed

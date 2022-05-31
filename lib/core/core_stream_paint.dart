@@ -2,13 +2,14 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vector_math/vector_math.dart';
 
 import '../models/model.dart';
 
-/// The main purpose of this class is to find many points of the contour of the liquid widget, fill in the physico-dynamic model and calculate the properties of this model before the next drawing.
+/// The main purpose of this class is to find many points of the contour of the liquid widget, fill in the physical-dynamic model and calculate the properties of this model before the next drawing.
 class CorePaint {
   late final double height;
   late final double width;
@@ -24,7 +25,7 @@ class CorePaint {
   final Path _path = Path();
   late bool _isReadTouch;
 
-  /// The main purpose of this class is to find many points of the contour of the liquid widget, fill in the physico-dynamic model and calculate the properties of this model before the next drawing.
+  /// The main purpose of this class is to find many points of the contour of the liquid widget, fill in the physical-dynamic model and calculate the properties of this model before the next drawing.
 
   CorePaint({
     required this.height,
@@ -57,16 +58,16 @@ class CorePaint {
   StreamSink<List<TouchModel>> get updatePointsStream => _inputController.sink;
 
   void _updatePoints() {
-    final math.Random _random = math.Random();
+    final math.Random random = math.Random();
     final List<TouchModel> touches = optionsParam.touches;
     for (final LayerModel layer in optionsParam.layers) {
       for (final DynamicPoint point in layer.points) {
         final double dx = point.ox -
             point.x +
-            (_random.nextDouble() - 0.5) * optionsParam.noise;
+            (random.nextDouble() - 0.5) * optionsParam.noise;
         final double dy = point.oy -
             point.y +
-            (_random.nextDouble() - 0.5) * optionsParam.noise;
+            (random.nextDouble() - 0.5) * optionsParam.noise;
         final double d = math.sqrt(dx * dx + dy * dy);
         final double f = d * optionsParam.forceFactor;
         point.vx += f * ((dx / d).isNaN ? 0 : (dx / d));
@@ -142,8 +143,8 @@ class CorePaint {
 
   /// Calculate points around widget
   void _getPoints() {
-    double _alfa;
-    double _gapTemp;
+    double alfa;
+    double gapTemp;
     double dx = topLeft;
     double dy = 0;
     _allOffsets = <Offset>{};
@@ -151,22 +152,23 @@ class CorePaint {
     /// Up border widget =================================================<
     final double upLine = width - topLeft - topRight;
 
-    _gapTemp = _getGapTemp(line: upLine, gap: _gap).toDouble();
+    gapTemp = _getGapTemp(line: upLine, gap: _gap).toDouble();
 
-    if (upLine > 0 && topRight < _gap)
-      _allOffsets.add(Offset(dx + _gapTemp / width, dy));
-    for (double i = 0; i <= upLine; i += _gapTemp) {
+    if (upLine > 0 && topRight < _gap) {
+      _allOffsets.add(Offset(dx + gapTemp / width, dy));
+    }
+    for (double i = 0; i <= upLine; i += gapTemp) {
       _allOffsets.add(Offset(dx + i, dy));
     }
 
     /// The upper right corner of the widget ===========================================<
     if (topRight > 0) {
       final topRightLine = topRight * math.pi / 2;
-      _gapTemp = _getGapTemp(line: topRightLine, gap: _gap).toDouble();
-      _alfa = (_gapTemp * 180) / (topRight * math.pi);
+      gapTemp = _getGapTemp(line: topRightLine, gap: _gap).toDouble();
+      alfa = (gapTemp * 180) / (topRight * math.pi);
       final double dxO = width - topRight;
       final double dyO = topRight;
-      for (double i = 270; i < 360; i += _alfa) {
+      for (double i = 270; i < 360; i += alfa) {
         dx = dxO + (topRight * math.cos(radians(i)));
         dy = dyO + (topRight * math.sin(radians(i)));
         _allOffsets.add(Offset(dx, dy));
@@ -175,24 +177,25 @@ class CorePaint {
 
     /// Right edge of the widget ==================================================<
     final double rightLine = height - topRight - bottomRight;
-    _gapTemp = _getGapTemp(line: rightLine, gap: _gap).toDouble();
+    gapTemp = _getGapTemp(line: rightLine, gap: _gap).toDouble();
     dx = width;
     dy = topRight;
-    if (rightLine > 0 && topLeft < _gap)
-      _allOffsets.add(Offset(dx, dy + _gapTemp / width));
-    for (double i = 0; i <= rightLine; i += _gapTemp) {
+    if (rightLine > 0 && topLeft < _gap) {
+      _allOffsets.add(Offset(dx, dy + gapTemp / width));
+    }
+    for (double i = 0; i <= rightLine; i += gapTemp) {
       _allOffsets.add(Offset(dx, dy + i));
     }
 
     /// Bottom-right corner of the widget ============================================<
     if (bottomRight > 0) {
       final bottomRightLine = bottomRight * math.pi / 2;
-      _gapTemp = _getGapTemp(line: bottomRightLine, gap: _gap).toDouble();
-      _alfa = (_gapTemp * 180) / (bottomRight * math.pi);
+      gapTemp = _getGapTemp(line: bottomRightLine, gap: _gap).toDouble();
+      alfa = (gapTemp * 180) / (bottomRight * math.pi);
 
       final double dxO = width - bottomRight;
       final double dyO = height - bottomRight;
-      for (double i = 0; i < 90; i += _alfa) {
+      for (double i = 0; i < 90; i += alfa) {
         dx = dxO + (bottomRight * math.cos(radians(i)));
         dy = dyO + (bottomRight * math.sin(radians(i)));
         _allOffsets.add(Offset(dx, dy));
@@ -201,24 +204,25 @@ class CorePaint {
 
     /// Bottom edge of the widget ==================================================<
     final double bottomLine = width - bottomLeft - bottomRight;
-    _gapTemp = _getGapTemp(line: bottomLine, gap: _gap).toDouble();
+    gapTemp = _getGapTemp(line: bottomLine, gap: _gap).toDouble();
     dx = bottomLeft;
     dy = height;
-    if (bottomLine > 0 && bottomRight < _gap)
-      _allOffsets.add(Offset(dx + bottomLine - _gapTemp / width, dy));
-    for (double i = bottomLine; i >= 0; i -= _gapTemp) {
+    if (bottomLine > 0 && bottomRight < _gap) {
+      _allOffsets.add(Offset(dx + bottomLine - gapTemp / width, dy));
+    }
+    for (double i = bottomLine; i >= 0; i -= gapTemp) {
       _allOffsets.add(Offset(dx + i, dy));
     }
 
     /// Bottom left corner of the widget =============================================<
     if (bottomLeft > 0) {
       final bottomRightLine = bottomLeft * math.pi / 2;
-      _gapTemp = _getGapTemp(line: bottomRightLine, gap: _gap).toDouble();
-      _alfa = (_gapTemp * 180) / (bottomLeft * math.pi);
+      gapTemp = _getGapTemp(line: bottomRightLine, gap: _gap).toDouble();
+      alfa = (gapTemp * 180) / (bottomLeft * math.pi);
 
       final double dxO = bottomLeft;
       final double dyO = height - bottomLeft;
-      for (double i = 90; i < 180; i += _alfa) {
+      for (double i = 90; i < 180; i += alfa) {
         dx = dxO + (bottomLeft * math.cos(radians(i)));
         dy = dyO + (bottomLeft * math.sin(radians(i)));
         _allOffsets.add(Offset(dx, dy));
@@ -227,24 +231,25 @@ class CorePaint {
 
     /// Left side of the widget ===================================================<
     final double leftLine = height - topLeft - bottomLeft;
-    _gapTemp = _getGapTemp(line: leftLine, gap: _gap).toDouble();
+    gapTemp = _getGapTemp(line: leftLine, gap: _gap).toDouble();
     dx = 0;
     dy = topLeft;
-    if (leftLine > 0 && bottomLeft < _gap)
-      _allOffsets.add(Offset(dx, dy + leftLine - _gapTemp / width));
-    for (double i = leftLine; i >= 0; i -= _gapTemp) {
+    if (leftLine > 0 && bottomLeft < _gap) {
+      _allOffsets.add(Offset(dx, dy + leftLine - gapTemp / width));
+    }
+    for (double i = leftLine; i >= 0; i -= gapTemp) {
       _allOffsets.add(Offset(dx, dy + i));
     }
 
     /// The upper left corner of the widget ============================================<
     if (topLeft > 0) {
       final topRightLine = topLeft * math.pi / 2;
-      _gapTemp = _getGapTemp(line: topRightLine, gap: _gap).toDouble();
-      _alfa = (_gapTemp * 180) / (topLeft * math.pi);
+      gapTemp = _getGapTemp(line: topRightLine, gap: _gap).toDouble();
+      alfa = (gapTemp * 180) / (topLeft * math.pi);
 
       final double dxO = topLeft;
       final double dyO = topLeft;
-      for (double i = 180; i < 270; i += _alfa) {
+      for (double i = 180; i < 270; i += alfa) {
         dx = dxO + (topLeft * math.cos(radians(i)));
         dy = dyO + (topLeft * math.sin(radians(i)));
         _allOffsets.add(Offset(dx, dy));
@@ -324,7 +329,9 @@ class CorePaint {
       //
       // _updatePoints();
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
