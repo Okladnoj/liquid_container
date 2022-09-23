@@ -8,9 +8,7 @@ void main() {
 class LiquidApp extends StatelessWidget {
   static const title = 'Liquid Container';
 
-  const LiquidApp({
-    super.key,
-  });
+  const LiquidApp({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:liquid_container/liquid_container.dart';
 
 class DifferentScaleLiquidWidget extends StatefulWidget {
-  const DifferentScaleLiquidWidget({Key? key}) : super(key: key);
+  const DifferentScaleLiquidWidget({super.key});
 
   @override
   _DifferentScaleLiquidWidgetState createState() =>

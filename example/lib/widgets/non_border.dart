@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:liquid_container/liquid_container.dart';
 
 class NonBorderLiquidWidget extends StatefulWidget {
-  const NonBorderLiquidWidget({Key? key}) : super(key: key);
+  const NonBorderLiquidWidget({super.key});
 
   @override
   _NonBorderLiquidWidgetState createState() => _NonBorderLiquidWidgetState();

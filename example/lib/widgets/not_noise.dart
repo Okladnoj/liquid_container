@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:liquid_container/liquid_container.dart';
 
 class NotNoiseLiquidWidget extends StatefulWidget {
-  const NotNoiseLiquidWidget({Key? key}) : super(key: key);
+  const NotNoiseLiquidWidget({super.key});
 
   @override
   _NotNoiseLiquidWidgetState createState() => _NotNoiseLiquidWidgetState();

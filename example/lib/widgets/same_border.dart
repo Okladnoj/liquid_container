@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:liquid_container/liquid_container.dart';
 
 class SameBorderLiquidWidget extends StatefulWidget {
-  const SameBorderLiquidWidget({Key? key}) : super(key: key);
+  const SameBorderLiquidWidget({super.key});
 
   @override
   _SameBorderLiquidWidgetState createState() => _SameBorderLiquidWidgetState();

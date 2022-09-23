@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:liquid_container/liquid_container.dart';
 
 class BigNoiseLiquidWidget extends StatefulWidget {
-  const BigNoiseLiquidWidget({Key? key}) : super(key: key);
+  const BigNoiseLiquidWidget({super.key});
 
   @override
   _BigNoiseLiquidWidgetState createState() => _BigNoiseLiquidWidgetState();

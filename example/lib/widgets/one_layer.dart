@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:liquid_container/liquid_container.dart';
 
 class OneLayerLiquidWidget extends StatefulWidget {
-  const OneLayerLiquidWidget({Key? key}) : super(key: key);
+  const OneLayerLiquidWidget({super.key});
 
   @override
   _OneLayerLiquidWidgetState createState() => _OneLayerLiquidWidgetState();
