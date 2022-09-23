@@ -27,7 +27,7 @@
 
 ## Video of the application
 
-![Video](assets/liquid_widget.mp4)
+![Video](assets/liquid_widget.gif)
 
 ## Features
 
