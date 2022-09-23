@@ -72,7 +72,7 @@ class LiquidContainer extends StatelessWidget {
     this.boxDecorationLabel,
     this.onTap,
     required this.optionsParam,
-    required this.child,
+    this.child,
     this.forceFactorTempBuild = 7,
     this.isShowTouchBuild = false,
   });
@@ -220,7 +220,7 @@ class LiquidContainer extends StatelessWidget {
                             .layers[optionsParam.layerNumbers[index]].color),
                   );
                 }).toList());
-                children.add(child ?? const CircularProgressIndicator());
+                children.add(child ?? const SizedBox.shrink());
                 try {
                   if (snapshot.hasData) {
                     final noNull = snapshot.data?.first.points.first.cNext;
@@ -245,7 +245,7 @@ class LiquidContainer extends StatelessWidget {
                     );
                   }
                 } catch (_) {
-                  return child ?? const CircularProgressIndicator();
+                  return child ?? const SizedBox.shrink();
                 }
               });
         }),
