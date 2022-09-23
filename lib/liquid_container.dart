@@ -1,4 +1,4 @@
 library liquid_container;
 
-export 'models/model.dart';
-export 'ui/ui_container.dart';
+export 'src/models/model.dart';
+export 'src/ui/ui_container.dart';
