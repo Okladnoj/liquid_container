@@ -23,7 +23,8 @@
 ## Demo
 
 <h1 align="center">Liquid button container. The physics of the Hover effect is not indistinguishable from a drop of water</h1>
-<p align="center"><img src="assets/image.png?raw=true"/></p>
+
+![png](assets/image.png?raw=true)
 
 ## Video of the application
 
@@ -41,7 +42,7 @@
 
   ```yaml
   dependencies:
-    liquid_container: ^1.0.2
+    liquid_container: ^1.0.4
   ```
 
 - Get the package from Pub:
