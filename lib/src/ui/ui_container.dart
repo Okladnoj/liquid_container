@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -30,6 +31,8 @@ class LiquidContainer extends StatelessWidget {
   final Widget? child;
   final void Function()? onTap;
   final bool isShowTouchBuild;
+
+  math.Random get _random => math.Random();
 
   /// ### [LiquidContainer] - Liquid button container with Hover effect. Easily add liquid effect to your application
   /// - Example of a Minimum Liquid Effect Setting
@@ -69,24 +72,24 @@ class LiquidContainer extends StatelessWidget {
   /// ```
   const LiquidContainer({
     super.key,
-    this.boxDecorationLabel,
-    this.onTap,
     required this.optionsParam,
-    this.child,
     this.forceFactorTempBuild = 7,
     this.isShowTouchBuild = false,
+    this.boxDecorationLabel,
+    this.onTap,
+    this.child,
   });
+
   @override
   Widget build(BuildContext context) {
-    final random = math.Random();
     late double height;
     late double width;
     CorePaint? corePaint;
-    Future.delayed(Duration(milliseconds: 50 + random.nextInt(150)), () {
+    Future.delayed(Duration(milliseconds: 50 + _random.nextInt(150)), () {
       try {
         corePaint?.updatePointsStream.add([
-          touchUpdate(
-            Offset(random.nextDouble() * width, random.nextDouble() * height),
+          _touchUpdate(
+            Offset(_random.nextDouble() * width, _random.nextDouble() * height),
             force:
                 math.max(optionsParam.forceFactorBuild, forceFactorTempBuild),
             isShow: isShowTouchBuild,
@@ -95,46 +98,40 @@ class LiquidContainer extends StatelessWidget {
         corePaint?.updatePointsStream.add([]);
       } catch (_) {}
     });
-
+    GestureDetector();
     return Container(
       decoration: boxDecorationLabel,
-      child: GestureDetector(
-        onTap: onTap,
-        onTapDown: (_) {
+      child: Listener(
+        onPointerSignal: ((event) {
+          debugPrint('tap: onPointerSignal');
+          onTap?.call();
+        }),
+        onPointerDown: (event) {
+          debugPrint('tap: onPointerDown');
           corePaint?.updatePointsStream.add(
             [
-              touchUpdate(
-                _.localPosition,
+              _touchUpdate(
+                event.localPosition,
                 force: optionsParam.forceFactorOnTap,
                 isShow: true,
               ),
             ],
           );
         },
-        onVerticalDragUpdate: (_) {
+        onPointerMove: (event) {
           corePaint?.updatePointsStream.add(
             [
-              touchUpdate(
-                _.localPosition,
+              _touchUpdate(
+                event.localPosition,
                 isShow: true,
               ),
             ],
           );
         },
-        onVerticalDragEnd: (details) {
+        onPointerCancel: (_) {
           corePaint?.updatePointsStream.add([]);
         },
-        onHorizontalDragUpdate: (_) {
-          corePaint?.updatePointsStream.add(
-            [
-              touchUpdate(_.localPosition, isShow: true),
-            ],
-          );
-        },
-        onHorizontalDragEnd: (details) {
-          corePaint?.updatePointsStream.add([]);
-        },
-        onTapUp: (_) {
+        onPointerUp: (_) {
           corePaint?.updatePointsStream.add([]);
         },
         child: LayoutBuilder(builder: (context, constraints) {
@@ -196,6 +193,8 @@ class LiquidContainer extends StatelessWidget {
             optionsParam: optionsParam,
           );
           optionsParam.corePaint = corePaint;
+
+          log('optionsParam.corePaint = $corePaint');
           return StreamBuilder<List<LayerModel>>(
               stream: corePaint?.streamListLayerModel,
               builder: (context, snapshot) {
@@ -216,8 +215,9 @@ class LiquidContainer extends StatelessWidget {
                       xShift, yShift, 0, 1, //
                     ),
                     decoration: boxDecorationLabel?.copyWith(
-                        color: optionsParam
-                            .layers[optionsParam.layerNumbers[index]].color),
+                      color: optionsParam
+                          .layers[optionsParam.layerNumbers[index]].color,
+                    ),
                   );
                 }).toList());
                 children.add(child ?? const SizedBox.shrink());
@@ -253,7 +253,7 @@ class LiquidContainer extends StatelessWidget {
     );
   }
 
-  TouchModel touchUpdate(
+  TouchModel _touchUpdate(
     Offset offset, {
     double force = 10,
     required bool isShow,

@@ -118,7 +118,7 @@ class Options {
       ));
       if (layer.color == null) {
         if (kDebugMode) {
-          print(layer.color);
+          debugPrint('${layer.color}');
         }
       }
     }

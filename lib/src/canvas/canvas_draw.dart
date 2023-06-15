@@ -74,7 +74,7 @@ class SimplePaint extends CustomPainter {
       }
     } catch (e) {
       if (kDebugMode) {
-        print(e);
+        debugPrint('$e');
       }
     }
   }

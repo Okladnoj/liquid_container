@@ -330,7 +330,7 @@ class CorePaint {
       // _updatePoints();
     } catch (e) {
       if (kDebugMode) {
-        print(e);
+        debugPrint('$e');
       }
     }
   }
@@ -359,9 +359,9 @@ class CorePaint {
     _timerOfRedraw?.start();
   }
 
-  void dispose() {
-    _outputController.close();
-    _inputController.close();
+  Future<void> dispose() async {
+    await _outputController.close();
+    await _inputController.close();
     _timerOfRedraw?.dispose();
   }
 }
