@@ -5,7 +5,7 @@ class ToExampleLiquidWidget extends StatefulWidget {
   const ToExampleLiquidWidget({super.key});
 
   @override
-  _ToExampleLiquidWidgetState createState() => _ToExampleLiquidWidgetState();
+  State<ToExampleLiquidWidget> createState() => _ToExampleLiquidWidgetState();
 }
 
 class _ToExampleLiquidWidgetState extends State<ToExampleLiquidWidget> {
