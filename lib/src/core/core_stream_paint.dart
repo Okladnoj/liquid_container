@@ -11,12 +11,12 @@ import '../models/model.dart';
 
 /// The main purpose of this class is to find many points of the contour of the liquid widget, fill in the physical-dynamic model and calculate the properties of this model before the next drawing.
 class CorePaint {
-  late final double height;
-  late final double width;
-  late final double topRight;
-  late final double bottomRight;
-  late final double topLeft;
-  late final double bottomLeft;
+  final double height;
+  final double width;
+  final double topRight;
+  final double bottomRight;
+  final double topLeft;
+  final double bottomLeft;
   late Options optionsParam;
   late List<LayerModel> _listLayerModel;
   late Set<Offset> _allOffsets;

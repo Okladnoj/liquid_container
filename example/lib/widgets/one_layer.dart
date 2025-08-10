@@ -5,7 +5,7 @@ class OneLayerLiquidWidget extends StatefulWidget {
   const OneLayerLiquidWidget({super.key});
 
   @override
-  _OneLayerLiquidWidgetState createState() => _OneLayerLiquidWidgetState();
+  State<OneLayerLiquidWidget> createState() => _OneLayerLiquidWidgetState();
 }
 
 class _OneLayerLiquidWidgetState extends State<OneLayerLiquidWidget> {
@@ -81,9 +81,9 @@ class _OneLayerLiquidWidgetState extends State<OneLayerLiquidWidget> {
   }
 
   Row _buildForegroundChild() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
+      children: <Widget>[
         Icon(
           Icons.liquor_outlined,
           color: Color(0xFF00FFD5),

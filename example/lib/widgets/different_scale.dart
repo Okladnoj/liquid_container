@@ -5,7 +5,7 @@ class DifferentScaleLiquidWidget extends StatefulWidget {
   const DifferentScaleLiquidWidget({super.key});
 
   @override
-  _DifferentScaleLiquidWidgetState createState() =>
+  State<DifferentScaleLiquidWidget> createState() =>
       _DifferentScaleLiquidWidgetState();
 }
 
@@ -91,9 +91,9 @@ class _DifferentScaleLiquidWidgetState
   }
 
   Row _buildForegroundChild() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
+      children: <Widget>[
         Icon(
           Icons.liquor_outlined,
           color: Color(0xFF00FFD5),

@@ -5,7 +5,7 @@ class BigNoiseLiquidWidget extends StatefulWidget {
   const BigNoiseLiquidWidget({super.key});
 
   @override
-  _BigNoiseLiquidWidgetState createState() => _BigNoiseLiquidWidgetState();
+  State<BigNoiseLiquidWidget> createState() => _BigNoiseLiquidWidgetState();
 }
 
 class _BigNoiseLiquidWidgetState extends State<BigNoiseLiquidWidget> {
@@ -97,9 +97,9 @@ class _BigNoiseLiquidWidgetState extends State<BigNoiseLiquidWidget> {
   }
 
   Row _buildForegroundChild() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
+      children: <Widget>[
         Icon(
           Icons.liquor_outlined,
           color: Color(0xFF00FFD5),

@@ -1,3 +1,11 @@
+## 1.1.0
+
+- Update dependencies to latest compatible versions
+- Update SDK constraints to >=3.0.0 <4.0.0
+- Update Flutter minimum version to >=3.10.0
+- Update flutter_lints to ^6.0.0
+- Update vector_math to ^2.1.4
+
 ## 1.0.4
 
 - Fix readme

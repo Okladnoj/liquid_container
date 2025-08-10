@@ -5,7 +5,7 @@ class TwoLayersLiquidWidget extends StatefulWidget {
   const TwoLayersLiquidWidget({super.key});
 
   @override
-  _TwoLayersLiquidWidgetState createState() => _TwoLayersLiquidWidgetState();
+  State<TwoLayersLiquidWidget> createState() => _TwoLayersLiquidWidgetState();
 }
 
 class _TwoLayersLiquidWidgetState extends State<TwoLayersLiquidWidget> {
@@ -89,9 +89,9 @@ class _TwoLayersLiquidWidgetState extends State<TwoLayersLiquidWidget> {
   }
 
   Row _buildForegroundChild() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
+      children: <Widget>[
         Icon(
           Icons.liquor_outlined,
           color: Color(0xFF00FFD5),

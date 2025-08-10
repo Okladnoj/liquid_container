@@ -5,7 +5,7 @@ class SameBorderLiquidWidget extends StatefulWidget {
   const SameBorderLiquidWidget({super.key});
 
   @override
-  _SameBorderLiquidWidgetState createState() => _SameBorderLiquidWidgetState();
+  State<SameBorderLiquidWidget> createState() => _SameBorderLiquidWidgetState();
 }
 
 class _SameBorderLiquidWidgetState extends State<SameBorderLiquidWidget> {
@@ -80,9 +80,9 @@ class _SameBorderLiquidWidgetState extends State<SameBorderLiquidWidget> {
   }
 
   Row _buildForegroundChild() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
+      children: <Widget>[
         Icon(
           Icons.liquor_outlined,
           color: Color(0xFF00FFD5),

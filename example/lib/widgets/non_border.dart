@@ -5,7 +5,7 @@ class NonBorderLiquidWidget extends StatefulWidget {
   const NonBorderLiquidWidget({super.key});
 
   @override
-  _NonBorderLiquidWidgetState createState() => _NonBorderLiquidWidgetState();
+  State<NonBorderLiquidWidget> createState() => _NonBorderLiquidWidgetState();
 }
 
 class _NonBorderLiquidWidgetState extends State<NonBorderLiquidWidget> {
@@ -78,9 +78,9 @@ class _NonBorderLiquidWidgetState extends State<NonBorderLiquidWidget> {
   }
 
   Row _buildForegroundChild() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
+      children: <Widget>[
         Icon(
           Icons.liquor_outlined,
           color: Color(0xFF00FFD5),
