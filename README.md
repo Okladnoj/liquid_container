@@ -13,8 +13,8 @@
     <img src="https://img.shields.io/github/license/aagarwal1012/animated-text-kit?color=red"
       alt="License: MIT" />
   </a>
-  <a href="https://www.paypal.com/donate?hosted_button_id=NBYVPYB7XDW6A">
-    <img src="https://img.shields.io/badge/Donate-PayPal-00457C?logo=paypal"
+  <a href="https://donate-okji.web.app/">
+    <img src="https://img.shields.io/badge/Donate-Support%20my%20work-E91E63?logo=githubsponsors&logoColor=white"
       alt="Donate" />
   </a>
 
@@ -42,7 +42,7 @@
 
   ```yaml
   dependencies:
-    liquid_container: ^1.0.4
+    liquid_container: ^1.1.1
   ```
 
 - Get the package from Pub:

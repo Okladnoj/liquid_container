@@ -1,3 +1,8 @@
+## 1.1.1
+
+- Replace donation links with a single donation page
+- Add funding link to pubspec
+
 ## 1.1.0
 
 - Update dependencies to latest compatible versions
